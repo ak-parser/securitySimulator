@@ -1,0 +1,20 @@
+.combo-box{
+-fx-background-radius: 15Px;
+-fx-background-color: #6483a1;
+-fx-text-fill: white
+
+}
+.spinner{
+-fx-radius: 40Px;
+ -fx-base: #6483a1;
+}
+
+.button{
+    -fx-background-radius: 10Px;
+    -fx-background-color: #AFCFEA;
+    -fx-text-fill: white
+}
+
+.combo-box > .list-view > .list-cell{
+-fx-text-fill: white;
+}

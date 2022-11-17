@@ -3,6 +3,8 @@ module com.example.securitysimulator {
     requires javafx.fxml;
 
 
-    opens com.example.securitysimulator to javafx.fxml;
-    exports com.example.securitysimulator;
+    opens securitysimulator to javafx.fxml;
+    exports securitysimulator;
+    exports securitysimulator.Logger;
+    opens securitysimulator.Logger to javafx.fxml;
 }
