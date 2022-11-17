@@ -18,14 +18,24 @@ public class Room implements Serializable {
         violationList = Collections.synchronizedList(new ArrayList<>());
     }
 
+
+    public void setLength(double length) {
+        this.length = length;
+    }
     public double getLength() {
         return length;
     }
 
+    public void setWidth(double width) {
+        this.width = width;
+    }
     public double getWidth() {
         return width;
     }
 
+    public void setWindowsAndDoors(int windowsAndDoors) {
+        this.windowsAndDoors = windowsAndDoors;
+    }
     public int getWindowsAndDoors() {
         return windowsAndDoors;
     }
@@ -41,17 +51,5 @@ public class Room implements Serializable {
     @Override
     public String toString(){
         return getLength() + " " + getWidth() + " " + getWindowsAndDoors() + "\n" + violationList.toString() + "\n";
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public void setWindowsAndDoors(int windowsAndDoors) {
-        this.windowsAndDoors = windowsAndDoors;
     }
 }
