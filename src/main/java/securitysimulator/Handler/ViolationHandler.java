@@ -26,7 +26,7 @@ public class ViolationHandler {
                     boolean violationHandled = false;
                     for (ViolationType violationType : room.getViolationsList()) {
                         violationHandled = true;
-                        
+
                         synchronized (logger) {
                             logger.LogViolation(floor, room, violationType, LocalDateTime.now());
                         }

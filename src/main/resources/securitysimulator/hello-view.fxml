@@ -30,16 +30,24 @@
                 <font>
                     <Font name="Georgia" size="18.0" />
                 </font></Label>
-            <Button fx:id="button_start" layoutX="18.0" layoutY="388.0" mnemonicParsing="false" onAction="#Start_button_click" prefHeight="35.0" prefWidth="100.0" text="Почати" textFill="WHITE">
+            <Button fx:id="button_start_generator" layoutX="18.0" layoutY="388.0" mnemonicParsing="false" onAction="#Start_generator_button_click" prefHeight="35.0" prefWidth="218.0" text="Почати генерацію" textFill="WHITE">
             <font>
                <Font name="Inter Regular" size="12.0" />
             </font></Button>
-            <Button fx:id="button_stop" layoutX="127.0" layoutY="388.0" mnemonicParsing="false" onAction="#Stop_button_click" prefHeight="35.0" prefWidth="100.0" style="-fx-text-fill: white;" text="Зупинити" textFill="WHITE">
+            <Button fx:id="button_stop_generator" layoutX="19.0" layoutY="388.0" mnemonicParsing="false" onAction="#Stop_generator_button_click" prefHeight="35.0" prefWidth="218.0" text="Зупинити генерацію" textFill="WHITE">
             <font>
                <Font name="JetBrains Mono Regular" size="12.0" />
             </font></Button>
+            <Button fx:id="button_start_handler" layoutX="18.0" layoutY="338.0" mnemonicParsing="false" onAction="#Start_handler_button_click" prefHeight="35.0" prefWidth="218.0" text="Почати симуляцію" textFill="WHITE">
+                <font>
+                    <Font name="Inter Regular" size="12.0" />
+                </font></Button>
+            <Button fx:id="button_stop_handler" layoutX="18.0" layoutY="338.0" mnemonicParsing="false" onAction="#Stop_handler_button_click" prefHeight="35.0" prefWidth="218.0" text="Зупинити симуляцію" textFill="WHITE">
+                <font>
+                    <Font name="Inter Regular" size="12.0" />
+                </font></Button>
             <ComboBox id="comboBox_violationType" fx:id="comboBox_violationType" layoutX="18.0" layoutY="440.0" prefHeight="35.0" prefWidth="117.0" />
-            <Button fx:id="button_initVio" layoutX="145.0" layoutY="440.0" mnemonicParsing="false" onAction="#Violation_init_click" prefHeight="35.0" prefWidth="84.0" text="Ініціювати">
+            <Button fx:id="button_initVio" layoutX="146.0" layoutY="440.0" mnemonicParsing="false" onAction="#Violation_init_click" prefHeight="35.0" prefWidth="92.0" text="Ініціювати">
             <font>
                <Font name="Inter Regular" size="12.0" />
             </font></Button>

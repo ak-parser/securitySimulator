@@ -6,40 +6,53 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import securitysimulator.Logger.FileLoggerDecorator;
+import securitysimulator.Logger.ILogger;
+import securitysimulator.Logger.UILoggerDecorator;
 import securitysimulator.Models.*;
 import securitysimulator.Serializers.BuildingSerializer;
 import securitysimulator.Thread.ViolationGeneratorThread;
 import securitysimulator.Thread.ViolationHandlerThread;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LabController implements Initializable {
     public Button button_save;
     public Button button_open;
-    @FXML
-    private ComboBox comboBox_violationType;
-    @FXML
-    private ComboBox comboBox_floor;
-    @FXML
-    private ComboBox comboBox_room;
-    @FXML
-    private ListView  list_datchyky;
-    @FXML
-    private ListView list_log;
-    @FXML
-    private Spinner spinner_area1;
-    @FXML
-    private Spinner spinner_area2;
-    @FXML
-    private Spinner spinner_doors;
-    @FXML
-    private Spinner spinner_windows;
+    @FXML private ComboBox comboBox_violationType;
+    @FXML private ComboBox comboBox_floor;
+    @FXML private ComboBox comboBox_room;
+    @FXML private ListView  list_datchyky;
+    @FXML private ListView list_log;
+    @FXML private Spinner spinner_area1;
+    @FXML private Spinner spinner_area2;
+    @FXML private Spinner spinner_doors;
+    @FXML private Spinner spinner_windows;
+
+    @FXML private Button button_start_generator;
+    @FXML private Button button_stop_generator;
+    @FXML private Button button_start_handler;
+    @FXML private Button button_stop_handler;
+
+    private ILogger logger;
+    private ObservableList<Label> oListLabels;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        comboBox_violationType.setItems(FXCollections.observableArrayList(ViolationType.values()));
 
+        oListLabels = FXCollections.observableArrayList(new ArrayList<Label>());
+        logger = new FileLoggerDecorator("log.txt");
+        logger = new UILoggerDecorator(logger, oListLabels);
+        list_log.setItems(oListLabels);
+
+        button_stop_generator.setVisible(false);
+        button_start_handler.setVisible(false);
+
+        comboBox_violationType.setItems(FXCollections.observableArrayList(ViolationType.values()));
 
         comboBox_room.setItems(FXCollections.observableArrayList(building.getFloor(0).getRoomList()));
         comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
@@ -82,9 +95,8 @@ public class LabController implements Initializable {
     private static ViolationGeneratorThread violationGeneratorThread;
     private static ViolationHandlerThread violationHandlerThread;
     private Building building = new Building();
-    private static Object mutex = new Object();
     public void createHandlerThread() {
-        violationHandlerThread = new ViolationHandlerThread(building);
+        violationHandlerThread = new ViolationHandlerThread(building, logger);
         violationHandlerThread.start();
     }
 
@@ -111,8 +123,18 @@ public class LabController implements Initializable {
     }
 
     public void Open_File_Click(ActionEvent actionEvent) {
-        System.out.println("Button OPEN");
-        building = BuildingSerializer.Deserialize();
+        /*System.out.println("Button OPEN");
+        building = BuildingSerializer.Deserialize();*/
+        Label label = new Label();
+        label.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")));
+        if(LocalDateTime.now().getSecond()%5>2) {
+            label.setStyle("-fx-background-color:#7C987C;");
+        }else {
+            label.setStyle("-fx-background-color:#984A65;");
+        }
+
+        oListLabels.add(0, label);
+        if(oListLabels.size() > 5) oListLabels.remove(oListLabels.size()-1);
 
     }
 
@@ -123,12 +145,32 @@ public class LabController implements Initializable {
         room.addViolation(violation);
     }
 
-    public void Stop_button_click(ActionEvent actionEvent) {
+    public void Stop_generator_button_click(ActionEvent actionEvent) {
+        button_stop_generator.setVisible(false);
+        button_start_generator.setVisible(true);
+
         killGeneratorThread();
     }
 
-    public void Start_button_click(ActionEvent actionEvent) {
+    public void Start_generator_button_click(ActionEvent actionEvent) {
+        button_stop_generator.setVisible(true);
+        button_start_generator.setVisible(false);
+
         createGeneratorThread();
+    }
+
+    public void Stop_handler_button_click(ActionEvent actionEvent) {
+        button_stop_handler.setVisible(false);
+        button_start_handler.setVisible(true);
+
+        killHandlerThread();
+    }
+
+    public void Start_handler_button_click(ActionEvent actionEvent) {
+        button_stop_handler.setVisible(true);
+        button_start_handler.setVisible(false);
+
+        createHandlerThread();
     }
 
     public void Remove_Room_click(ActionEvent actionEvent) {
@@ -157,7 +199,6 @@ public class LabController implements Initializable {
     }
 
     public void ComboBoxFloor_changed(ActionEvent actionEvent) {
-        System.out.println("Combo changed");
         UpdateRoomsCombo();
     }
 }

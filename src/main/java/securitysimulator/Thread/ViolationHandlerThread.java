@@ -11,10 +11,7 @@ public class ViolationHandlerThread implements Runnable {
     ViolationHandler violationHandler;
     private boolean exit = false;
 
-    public ViolationHandlerThread(Building building) {
-        ILogger logger = new FileLoggerDecorator("log.txt");
-        logger = new UILoggerDecorator(logger);
-
+    public ViolationHandlerThread(Building building, ILogger logger) {
         violationHandler = new ViolationHandler(building, logger);
         thread = new Thread(this);
         System.out.println("New thread: " + thread);
@@ -34,7 +31,6 @@ public class ViolationHandlerThread implements Runnable {
             violationHandler.handle();
         }
     }
-
     public void kill() {
         exit = true;
     }

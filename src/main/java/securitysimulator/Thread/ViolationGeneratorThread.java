@@ -25,7 +25,6 @@ public class ViolationGeneratorThread implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Generator started");
         while (!exit) {
             Random randomizer = new Random();
             if(randomizer.nextInt(5) == 1){
@@ -50,6 +49,5 @@ public class ViolationGeneratorThread implements Runnable {
 
     public void kill() {
         exit = true;
-        System.out.println(thread + " has been killed");
     }
 }

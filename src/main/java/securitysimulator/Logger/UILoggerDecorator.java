@@ -1,5 +1,7 @@
 package securitysimulator.Logger;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import securitysimulator.Models.*;
 import securitysimulator.Models.Floor;
 import securitysimulator.Models.Room;
@@ -13,7 +15,7 @@ public class UILoggerDecorator extends BaseLogger{
 
     public UILoggerDecorator(){
     }
-    public UILoggerDecorator(ILogger wrapee){
+    public UILoggerDecorator(ILogger wrapee, ObservableList<Label> oListLabels){
         super(wrapee);
     }
     private void LogToUI(String msg, LocalDateTime date){
