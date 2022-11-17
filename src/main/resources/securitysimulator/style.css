@@ -14,7 +14,15 @@
     -fx-background-color: #AFCFEA;
     -fx-text-fill: white
 }
-
-.combo-box > .list-view > .list-cell{
--fx-text-fill: white;
+.list-view  {
+-fx-background-color:#d0d4db;
 }
+
+
+.list-view .list-cell {
+-fx-selection-bar-non-focused: green;
+-fx-selection-bar:#AFCFEA;
+-fx-text-fill: black;
+-fx-cell-size: 36;
+}
+

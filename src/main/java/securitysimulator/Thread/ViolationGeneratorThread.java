@@ -22,6 +22,7 @@ public class ViolationGeneratorThread implements Runnable {
     @Override
     public void run() {
         while (!exit) {
+
             ViolationType violationType = RandomViolationGenerator.GenerateViolation();
             try {
                 building.getRandomFloor().getRandomRoom().addViolation(violationType);

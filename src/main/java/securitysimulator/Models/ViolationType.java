@@ -1,6 +1,8 @@
 package securitysimulator.Models;
 
 import java.io.Serializable;
+import java.util.EnumMap;
+import java.util.Map;
 
 public enum ViolationType implements Serializable {
     Fire,
@@ -11,6 +13,25 @@ public enum ViolationType implements Serializable {
 
     @Override
     public String toString(){
-        return this.name();
+        switch (this){
+            case Fire -> {
+                return "Пожежа";
+            }
+            case Flood -> {
+                return "Затоплення";
+            }
+            case Gas -> {
+                return "Газ";
+            }
+            case  Invasion -> {
+                return "Вторгнення";
+            }
+            case Movement -> {
+                return "Рух";
+            }
+            default -> {
+                return "";
+            }
+        }
     }
 }

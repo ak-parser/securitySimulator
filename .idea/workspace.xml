@@ -7,7 +7,16 @@
     <list default="true" id="f8a65deb-39b1-4488-a3ae-e6a0dca0ae1d" name="Changes" comment="Add threads &amp; handler">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/LabApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/LabApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/LabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/LabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Floor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Floor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/ViolationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/ViolationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Serializers/BuildingSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Serializers/BuildingSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Thread/ViolationGeneratorThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Thread/ViolationGeneratorThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/securitysimulator/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/securitysimulator/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/securitysimulator/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/securitysimulator/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +59,9 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Documents/Java Projects/kpp_lab8/securitySimulator/lib/gson-2.10.jar",
+    "last_opened_file_path": "D:/Documents/Java Projects/kpp_lab8/securitySimulator/securitySimulator/lib/gson-2.10.jar",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }

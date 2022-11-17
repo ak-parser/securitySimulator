@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class BuildingSerializer {
-    private static String _filename = "";
+    private static String _filename = "D:\\Documents\\SER_TEST.txt";
 
     public static void SetFilename(String filename){
         BuildingSerializer._filename = filename;

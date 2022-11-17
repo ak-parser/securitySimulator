@@ -2,6 +2,7 @@ module com.example.securitysimulator {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    //requires com.google.gson;
 
 
     opens securitysimulator to javafx.fxml;

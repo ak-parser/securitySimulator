@@ -9,8 +9,12 @@ import java.util.Random;
 public class Building implements Serializable {
     private final List<Floor> floorsList;
 
+//    public Building(){
+//        floorsList = Collections.synchronizedList(new ArrayList<>());
+//    }
     public Building(){
-        floorsList = Collections.synchronizedList(new ArrayList<>());
+        floorsList = new ArrayList<>();
+        floorsList.add(new Floor("Floor 1"));
     }
 
     public Floor getRandomFloor() throws Exception {
@@ -20,11 +24,19 @@ public class Building implements Serializable {
     }
 
     public void addFloor(){
-        floorsList.add(new Floor());
+        int size = floorsList.size();
+        floorsList.add(new Floor("Floor " + (size+1)));
+    }
+    public void removeFloor(){
+        floorsList.remove(floorsList.size()-1);
     }
 
     public List<Floor> getFloorsList(){
         return floorsList;
+    }
+    public Floor getFloor(int index){
+        if(index < 0 || index >= floorsList.size()) return null;
+        return floorsList.get(index);
     }
 
     @Override
