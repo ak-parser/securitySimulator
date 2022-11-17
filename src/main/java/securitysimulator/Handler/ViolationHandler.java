@@ -30,7 +30,7 @@ public class ViolationHandler {
                             logger.LogViolation(floor, room, violationType, LocalDateTime.now());
                             switch (violationType){
                                 case Fire -> {
-                                    ((Runnable) () -> {
+                                    new Thread(() -> {
                                         try {
                                             Thread.sleep(700);
                                         } catch (InterruptedException e) {}
@@ -47,11 +47,11 @@ public class ViolationHandler {
                                             Thread.sleep(1200);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Викличено службу ДСНС (101)", LocalDateTime.now());
-                                    }).run();
+                                    }).start();
 
                                 }
                                 case Flood, Gas -> {
-                                    ((Runnable) () -> {
+                                    new Thread(() -> {
                                         try {
                                             Thread.sleep(800);
                                         } catch (InterruptedException e) {}
@@ -60,10 +60,10 @@ public class ViolationHandler {
                                             Thread.sleep(200);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Людей сповіщено про евакуацію", LocalDateTime.now());
-                                    }).run();
+                                    }).start();
                                 }
                                 case  Invasion -> {
-                                    ((Runnable) () -> {
+                                    new Thread(() -> {
                                         try {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
@@ -72,10 +72,10 @@ public class ViolationHandler {
                                             Thread.sleep(600);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
-                                    }).run();
+                                    }).start();
                                 }
                                 case Movement -> {
-                                    ((Runnable) () -> {
+                                    new Thread(() -> {
                                         try {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
@@ -92,7 +92,7 @@ public class ViolationHandler {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
-                                    }).run();
+                                    }).start();
                                 }
                             }
                         }

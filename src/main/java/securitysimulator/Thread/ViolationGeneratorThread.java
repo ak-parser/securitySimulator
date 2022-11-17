@@ -2,6 +2,7 @@ package securitysimulator.Thread;
 
 import securitysimulator.Generators.RandomViolationGenerator;
 import securitysimulator.Models.Building;
+import securitysimulator.Models.Floor;
 import securitysimulator.Models.Room;
 import securitysimulator.Models.ViolationType;
 
@@ -26,6 +27,28 @@ public class ViolationGeneratorThread implements Runnable {
     @Override
     public void run() {
         while (!exit) {
+            for (Floor floor : building.getFloorsList()){
+                for(Room room : floor.getRoomList()){
+                    int d = (int)( (room.getDoors() + room.getWindows()) *
+                            room.getLength() *
+                            room.getWidth());
+                    Random randomizer = new Random();
+                    if(d > randomizer.nextInt(4000)){
+                        ViolationType violationType = RandomViolationGenerator.GenerateViolation();
+                        synchronized (room){
+                            room.addViolation(violationType);
+                        }
+                        System.out.println("GENERATED " + violationType + " " + floor + " " + room);
+                    }
+
+                }
+            }
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+
+            }
+            /*
             Random randomizer = new Random();
             if(randomizer.nextInt(5) == 1){
                 try {
@@ -43,7 +66,7 @@ public class ViolationGeneratorThread implements Runnable {
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
-            }
+            }*/
         }
     }
 

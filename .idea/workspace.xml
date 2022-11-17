@@ -9,7 +9,8 @@
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Handler/ViolationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Handler/ViolationHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/LabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/LabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Logger/UILoggerDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Logger/UILoggerDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Models/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Thread/ViolationGeneratorThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Thread/ViolationGeneratorThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/securitysimulator/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/securitysimulator/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

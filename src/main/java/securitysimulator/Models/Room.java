@@ -35,6 +35,7 @@ public class Room implements Serializable {
         return this.name;
     }
     public void setLength(double length) {
+        if(length < 1 || length > 10) return;
         this.length = length;
     }
     public double getLength() {
@@ -42,6 +43,7 @@ public class Room implements Serializable {
     }
 
     public void setWidth(double width) {
+        if(width < 1 || width > 10) return;
         this.width = width;
     }
     public double getWidth() {
@@ -49,6 +51,7 @@ public class Room implements Serializable {
     }
 
     public void setWindows(int windows) {
+        if(windows < 1 || windows > 10) return;
         this.windows = windows;
     }
     public int getWindows() {
@@ -56,6 +59,7 @@ public class Room implements Serializable {
     }
 
     public void setDoors(int doors) {
+        if(doors < 1 || doors > 10) return;
         this.doors = doors;
     }
     public int getDoors() {

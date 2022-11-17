@@ -68,16 +68,16 @@ public class LabController implements Initializable {
         //comboBox_floor.getSelectionModel().selectFirst();
 
         spinner_windows.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10)
         );
         spinner_doors.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10)
         );
         spinner_area1.setValueFactory(
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100)
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 10)
         );
         spinner_area2.setValueFactory(
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100)
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 10)
         );
 
         {
@@ -225,6 +225,9 @@ public class LabController implements Initializable {
         createHandlerThread();
     }
 
+    public void Clear_log_click(ActionEvent actionEvent) {
+        oListLabels.clear();
+    }
     public void Remove_Room_click(ActionEvent actionEvent) {
         Floor floor = (Floor) comboBox_floor.getValue();
         if(floor == null) return;

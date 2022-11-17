@@ -26,7 +26,8 @@
             <Button fx:id="button_deleteFloor" layoutX="188.0" layoutY="46.0" mnemonicParsing="false" onAction="#Remove_Floor_click" prefHeight="25.0" prefWidth="29.0" text="-" />
             <Button fx:id="button_addRoom" layoutX="420.0" layoutY="15.0" mnemonicParsing="false" onAction="#Add_Room_click" prefHeight="25.0" prefWidth="29.0" text="+" />
             <Button fx:id="button_deleteRoom" layoutX="420.0" layoutY="45.0" mnemonicParsing="false" onAction="#Remove_Room_click" prefHeight="25.0" prefWidth="29.0" text="-" />
-            <Label layoutX="483.0" layoutY="21.0" text="Журнал">
+            <Button fx:id="button_clear_log" layoutX="794.0" layoutY="19.0" mnemonicParsing="false" onAction="#Clear_log_click" prefHeight="25.0" prefWidth="83.0" text="Очистити" />
+            <Label layoutX="524.0" layoutY="21.0" text="Журнал">
                 <font>
                     <Font name="Georgia" size="18.0" />
                 </font></Label>
