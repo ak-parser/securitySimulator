@@ -1,15 +1,21 @@
 package securitysimulator.Thread;
 
 import securitysimulator.Handler.ViolationHandler;
+import securitysimulator.Logger.FileLoggerDecorator;
+import securitysimulator.Logger.ILogger;
+import securitysimulator.Logger.UILoggerDecorator;
 import securitysimulator.Models.Building;
 
 public class ViolationHandlerThread implements Runnable {
-    private final Building building;
     private final Thread thread;
+    ViolationHandler violationHandler;
     private boolean exit = false;
 
-    public ViolationHandlerThread(Building _building) {
-        building = _building;
+    public ViolationHandlerThread(Building building) {
+        ILogger logger = new FileLoggerDecorator("log.txt");
+        logger = new UILoggerDecorator(logger);
+
+        violationHandler = new ViolationHandler(building, logger);
         thread = new Thread(this);
         System.out.println("New thread: " + thread);
     }
@@ -20,8 +26,11 @@ public class ViolationHandlerThread implements Runnable {
 
     @Override
     public void run() {
-        ViolationHandler violationHandler = new ViolationHandler(building);
         while (!exit) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
             violationHandler.handle();
         }
     }

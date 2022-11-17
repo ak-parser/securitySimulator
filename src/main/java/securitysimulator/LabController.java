@@ -43,6 +43,8 @@ public class LabController implements Initializable {
 
         comboBox_room.setItems(FXCollections.observableArrayList(building.getFloor(0).getRoomList()));
         comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
+        comboBox_floor.setValue(building.getFloor(0));
+        UpdateRoomsCombo();
         comboBox_violationType.getSelectionModel().selectFirst();
         //comboBox_room.getSelectionModel().selectFirst();
         //comboBox_floor.getSelectionModel().selectFirst();
@@ -61,7 +63,9 @@ public class LabController implements Initializable {
         );
         this.list_datchyky.setItems(FXCollections.observableArrayList(new String[]{"Датчики вогню", "Датчики води", "Датчики газу", "Датчики руху"}));
 
+        createHandlerThread();
     }
+
 
     private void UpdateFloorsCombo(){
         comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
@@ -75,8 +79,8 @@ public class LabController implements Initializable {
         comboBox_room.setValue(floor.getRoomList().get(0));
     }
 
-    private ViolationGeneratorThread violationGeneratorThread;
-    private ViolationHandlerThread violationHandlerThread;
+    private static ViolationGeneratorThread violationGeneratorThread;
+    private static ViolationHandlerThread violationHandlerThread;
     private Building building = new Building();
     private static Object mutex = new Object();
     public void createHandlerThread() {
@@ -89,8 +93,15 @@ public class LabController implements Initializable {
         violationGeneratorThread.start();
     }
 
-    public void killGeneratorThread() {
+    public static void killGeneratorThread() {
+        if(violationGeneratorThread == null) return;
         violationGeneratorThread.kill();
+        violationGeneratorThread = null;
+    }
+    public static void killHandlerThread() {
+        if(violationHandlerThread == null) return;
+        violationHandlerThread.kill();
+        violationHandlerThread = null;
     }
 
 

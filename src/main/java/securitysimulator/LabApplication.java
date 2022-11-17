@@ -17,6 +17,10 @@ public class LabApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Security simulator!");
         stage.setScene(scene);
+        stage.setOnCloseRequest((evt)->{
+            LabController.killHandlerThread();
+            LabController.killGeneratorThread();
+        });
         stage.show();
 
     }
