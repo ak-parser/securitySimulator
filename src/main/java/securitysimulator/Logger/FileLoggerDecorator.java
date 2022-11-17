@@ -24,11 +24,8 @@ public class FileLoggerDecorator extends BaseLogger {
     public void SetFile(String filename){
         try {
             File logFile = new File(filename);
-            if(logFile.createNewFile()){
-                System.out.println("<+> Log file created");
-            }
+            logFile.createNewFile();
             logFileWriter = new FileWriter(filename, true);
-            System.out.println("<+> Log file opened");
 
             LogToFile("\n" + LocalDateTime.now().format(dtf) + "     START SESSION");
 
