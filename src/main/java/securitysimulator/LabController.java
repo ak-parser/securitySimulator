@@ -187,7 +187,8 @@ public class LabController implements Initializable {
         building = b;
         UpdateFloorsCombo();
         UpdateRoomsCombo();
-
+        UpdateFloorsCountLabel();
+        UpdateRoomsCountLabel();
     }
 
     public void Violation_init_click(ActionEvent actionEvent) {
