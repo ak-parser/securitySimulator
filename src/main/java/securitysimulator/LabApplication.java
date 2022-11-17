@@ -12,16 +12,16 @@ import java.io.IOException;
 public class LabApplication extends Application {
     private ViolationGeneratorThread violationGeneratorThread;
     private ViolationHandlerThread violationHandlerThread;
-    private Building building;
+    private Building building = new Building();
 
     private void createHandlerThread() {
         violationHandlerThread = new ViolationHandlerThread(building);
-        violationHandlerThread.run();
+        violationHandlerThread.start();
     }
 
     private void createGeneratorThread() {
         violationGeneratorThread = new ViolationGeneratorThread(building);
-        violationGeneratorThread.run();
+        violationGeneratorThread.start();
     }
 
     private void killGeneratorThread() {
