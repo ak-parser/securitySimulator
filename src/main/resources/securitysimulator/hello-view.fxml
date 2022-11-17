@@ -12,7 +12,7 @@
     <Pane prefHeight="498.0" prefWidth="939.0" style="-fx-background-color: #dce4f2;">
         <children>
             <ComboBox id="comboBox_floor" fx:id="comboBox_floor" layoutX="18.0" layoutY="16.0" onAction="#ComboBoxFloor_changed" prefHeight="35.0" prefWidth="159.0" />
-            <ComboBox id="comboBox_room" fx:id="comboBox_room" layoutX="242.0" layoutY="16.0" prefHeight="35.0" prefWidth="159.0" />
+            <ComboBox id="comboBox_room" fx:id="comboBox_room" layoutX="242.0" layoutY="16.0" onAction="#ComboBoxRoom_changed" prefHeight="35.0" prefWidth="159.0" />
             <Label layoutX="14.0" layoutY="87.0" text="Властивості">
                 <font>
                     <Font name="Georgia" size="18.0" />
@@ -51,28 +51,29 @@
             <font>
                <Font name="Inter Regular" size="12.0" />
             </font></Button>
-         <Pane layoutX="14.0" layoutY="114.0" prefHeight="179.0" prefWidth="218.0" style="-fx-background-color: #d0d4db;">
+         <Pane layoutX="14.0" layoutY="114.0" prefHeight="194.0" prefWidth="226.0" style="-fx-background-color: #d0d4db;">
             <children>
-                  <Label layoutX="15.0" layoutY="19.0" text="Площа">
-                      <font>
-                          <Font name="Georgia" size="14.0" />
-                      </font>
+              <Label layoutX="9.0" layoutY="20.0" text="Площа">
+                  <font>
+                      <Font name="Georgia" size="14.0" />
+                  </font>
+              </Label>
+              <Label layoutX="18.0" layoutY="69.0" text="Двері" textAlignment="RIGHT">
+                  <font>
+                      <Font name="Georgia" size="14.0" />
+                  </font>
+              </Label>
+              <Label layoutX="18.0" layoutY="118.0" text="Вікна" textAlignment="RIGHT">
+                  <font>
+                      <Font name="Georgia" size="14.0" />
+                  </font>
                </Label>
-                  <Label layoutX="14.0" layoutY="70.0" text="Двері">
-                      <font>
-                          <Font name="Georgia" size="14.0" />
-                      </font>
-               </Label>
-                  <Label layoutX="15.0" layoutY="118.0" text="Вікна">
-                      <font>
-                          <Font name="Georgia" size="14.0" />
-                      </font>
-               </Label>
-                  <Spinner fx:id="spinner_area1" editable="true" layoutX="72.0" layoutY="14.0" prefHeight="25.0" prefWidth="46.0" />
-                  <Spinner fx:id="spinner_area2" editable="true" layoutX="141.0" layoutY="14.0" prefHeight="25.0" prefWidth="46.0" />
-                  <Spinner fx:id="spinner_doors" editable="true" layoutX="72.0" layoutY="66.0" prefHeight="25.0" prefWidth="46.0" />
-                  <Spinner fx:id="spinner_windows" editable="true" layoutX="72.0" layoutY="114.0" prefHeight="25.0" prefWidth="46.0" />
-                  <Label layoutX="127.0" layoutY="19.0" text="X" />
+              <Spinner fx:id="spinner_area1" editable="true" layoutX="64.0" layoutY="16.0" prefHeight="25.0" prefWidth="67.0" />
+              <Spinner fx:id="spinner_area2" editable="true" layoutX="149.0" layoutY="16.0" prefHeight="25.0" prefWidth="67.0" />
+              <Spinner fx:id="spinner_doors" editable="true" layoutX="64.0" layoutY="64.0" prefHeight="25.0" prefWidth="67.0" />
+              <Spinner fx:id="spinner_windows" editable="true" layoutX="64.0" layoutY="113.0" prefHeight="25.0" prefWidth="67.0" />
+              <Label layoutX="138.0" layoutY="20.0" text="X" />
+                <Button fx:id="button_set_room" layoutX="18.0" layoutY="155.0" mnemonicParsing="false" onAction="#Set_Room_button_Click" prefHeight="25.0" prefWidth="200.0" text="Встановити" />
             </children>
          </Pane>
          <Button fx:id="button_open" layoutX="302.0" layoutY="445.0" mnemonicParsing="false" onAction="#Open_File_Click" prefHeight="25.0" prefWidth="128.0" text="Відкрити файл" />

@@ -26,3 +26,8 @@
 -fx-cell-size: 36;
 }
 
+.list-view .list-cell .detected {
+-fx-background-color: red;
+-fx-text-fill: black;
+}
+

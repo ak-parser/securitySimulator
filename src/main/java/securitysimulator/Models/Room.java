@@ -9,15 +9,16 @@ public class Room implements Serializable {
     private String name;
     private double length;
     private double width;
-    private int windowsAndDoors;
+    private int windows;
+    private int doors;
     private final List<ViolationType> violationList;
 
-    public Room(String name, double length, double width, int windowsAndDoors){
+    public Room(String name, double length, double width, int windows, int doors){
         this.name = name;
         this.setLength(length);
         this.setWidth(width);
-        this.setWindowsAndDoors(windowsAndDoors);
-//        violationList = Collections.synchronizedList(new ArrayList<>());
+        this.setWindows(windows);
+        this.setDoors(doors);
         violationList = new ArrayList<>();
     }
 
@@ -25,8 +26,8 @@ public class Room implements Serializable {
         this.name = name;
         this.setLength(2);
         this.setWidth(2);
-        this.setWindowsAndDoors(3);
-//        violationList = Collections.synchronizedList(new ArrayList<>());
+        this.setWindows(3);
+        this.setDoors(1);
         violationList = new ArrayList<>();
     }
 
@@ -47,11 +48,18 @@ public class Room implements Serializable {
         return width;
     }
 
-    public void setWindowsAndDoors(int windowsAndDoors) {
-        this.windowsAndDoors = windowsAndDoors;
+    public void setWindows(int windows) {
+        this.windows = windows;
     }
-    public int getWindowsAndDoors() {
-        return windowsAndDoors;
+    public int getWindows() {
+        return windows;
+    }
+
+    public void setDoors(int doors) {
+        this.doors = doors;
+    }
+    public int getDoors() {
+        return doors;
     }
 
     public List<ViolationType> getViolationsList(){
@@ -64,7 +72,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString(){
-        return name;
+        return getName();
         //return getLength() + " " + getWidth() + " " + getWindowsAndDoors() + "\n" + violationList.toString() + "\n";
     }
 }

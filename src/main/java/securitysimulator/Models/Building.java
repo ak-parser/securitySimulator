@@ -14,20 +14,21 @@ public class Building implements Serializable {
 //    }
     public Building(){
         floorsList = new ArrayList<>();
-        floorsList.add(new Floor("Floor 1"));
+        floorsList.add(new Floor("Поверх 1"));
     }
 
-    public Floor getRandomFloor() throws Exception {
-        if (floorsList.isEmpty()) throw new Exception("No floors");
+    public Floor getRandomFloor() {
+        if (floorsList.isEmpty()) return null;
         Random randomizer = new Random();
         return floorsList.get(randomizer.nextInt(floorsList.size()));
     }
 
     public void addFloor(){
         int size = floorsList.size();
-        floorsList.add(new Floor("Floor " + (size+1)));
+        floorsList.add(new Floor("Поверх " + (size+1)));
     }
     public void removeFloor(){
+        if(floorsList.size() < 2) return;
         floorsList.remove(floorsList.size()-1);
     }
 

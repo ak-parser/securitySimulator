@@ -26,30 +26,48 @@ public class ViolationHandler {
                     boolean violationHandled = false;
                     for (ViolationType violationType : room.getViolationsList()) {
                         violationHandled = true;
-
                         synchronized (logger) {
                             logger.LogViolation(floor, room, violationType, LocalDateTime.now());
-                        }
-                    /*switch (violationType){
-                        case Fire -> {
+                            switch (violationType){
+                                case Fire -> {
+                                    ((Runnable) () -> {
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Зупущено систему тушіння вогню", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Викличено службу ДСНС", LocalDateTime.now());
+                                    }).run();
 
-                        }
-                        case Flood -> {
+                                }
+                                case Flood -> {
+                                    ((Runnable) () -> {
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Зупущено систему тушіння вогню", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Викличено службу ДСНС", LocalDateTime.now());
+                                    }).run();
+                                }
+                                case Gas -> {
 
-                        }
-                        case Gas -> {
+                                }
+                                case  Invasion -> {
 
-                        }
-                        case  Invasion -> {
+                                }
+                                case Movement -> {
 
-                        }
-                        case Movement -> {
+                                }
+                                default -> {
 
+                                }
+                            }
                         }
-                        default -> {
-
-                        }
-                    }*/
                     }
                     if (violationHandled) {
                         room.getViolationsList().clear();

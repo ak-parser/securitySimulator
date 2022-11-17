@@ -1,5 +1,6 @@
 package securitysimulator;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import securitysimulator.Logger.FileLoggerDecorator;
 import securitysimulator.Logger.ILogger;
+import securitysimulator.Logger.TestLogger;
 import securitysimulator.Logger.UILoggerDecorator;
 import securitysimulator.Models.*;
 import securitysimulator.Serializers.BuildingSerializer;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class LabController implements Initializable {
@@ -57,39 +60,41 @@ public class LabController implements Initializable {
         comboBox_room.setItems(FXCollections.observableArrayList(building.getFloor(0).getRoomList()));
         comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
         comboBox_floor.setValue(building.getFloor(0));
-        UpdateRoomsCombo();
         comboBox_violationType.getSelectionModel().selectFirst();
         //comboBox_room.getSelectionModel().selectFirst();
         //comboBox_floor.getSelectionModel().selectFirst();
 
         spinner_windows.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100)
         );
         spinner_doors.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100)
         );
         spinner_area1.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100)
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100)
         );
         spinner_area2.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100)
+                new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100)
         );
-        this.list_datchyky.setItems(FXCollections.observableArrayList(new String[]{"Датчики вогню", "Датчики води", "Датчики газу", "Датчики руху"}));
+
+        {
+            var labels = new ArrayList<Label>();
+            labels.add(new Label("Датчики вогню"));
+            labels.add(new Label("Датчики води"));
+            labels.add(new Label("Датчики газу"));
+            labels.add(new Label("Датчики руху"));
+
+            list_datchyky.setItems(FXCollections.observableArrayList(
+                    labels
+            ));
+        }
+
+
+        UpdateRoomsCombo();
 
         createHandlerThread();
-    }
 
 
-    private void UpdateFloorsCombo(){
-        comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
-        //comboBox_floor.setValue(building.getFloorsList().get(0));
-    }
-
-    private void UpdateRoomsCombo(){
-        Floor floor = (Floor) comboBox_floor.getValue();
-        if(floor == null) return;
-        comboBox_room.setItems(FXCollections.observableArrayList(floor.getRoomList()));
-        comboBox_room.setValue(floor.getRoomList().get(0));
     }
 
     private static ViolationGeneratorThread violationGeneratorThread;
@@ -116,25 +121,59 @@ public class LabController implements Initializable {
         violationHandlerThread = null;
     }
 
+    private void UpdateFloorsCombo(){
+        comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
+        //comboBox_floor.setValue(building.getFloorsList().get(0));
+    }
 
+    private void UpdateRoomsCombo(){
+        Floor floor = (Floor) comboBox_floor.getValue();
+        if(floor == null) return;
+        comboBox_room.setItems(FXCollections.observableArrayList(floor.getRoomList()));
+        comboBox_room.setValue(floor.getRoomList().get(0));
+        UpdateSpinboxes();
+    }
+
+    public void UpdateSpinboxes(){
+        Room room = (Room)comboBox_room.getValue();
+        if(room == null) return;
+        if(spinner_area1.getValueFactory() == null) return;
+        if(spinner_area2.getValueFactory() == null) return;
+        if(spinner_doors.getValueFactory() == null) return;
+        if(spinner_windows.getValueFactory() == null) return;
+
+        spinner_area1.getValueFactory().setValue(Double.valueOf(room.getLength()));
+        spinner_area2.getValueFactory().setValue(Double.valueOf(room.getWidth()));
+        spinner_doors.getValueFactory().setValue(Integer.valueOf(room.getDoors()));
+        spinner_windows.getValueFactory().setValue(Integer.valueOf(room.getWindows()));
+    }
+
+    public void Set_Room_button_Click(ActionEvent actionEvent){
+        Room room = (Room)comboBox_room.getValue();
+        if(room == null) return;
+        room.setLength((double)spinner_area1.getValue());
+        room.setWidth((double)spinner_area2.getValue());
+        room.setDoors((int)spinner_doors.getValue());
+        room.setWindows((int)spinner_windows.getValue());
+    }
+
+    public void ComboBoxFloor_changed(ActionEvent actionEvent) {
+        UpdateRoomsCombo();
+    }
+    public void ComboBoxRoom_changed(ActionEvent actionEvent) {
+        UpdateSpinboxes();
+    }
     public void Save_button_click(ActionEvent actionEvent) {
         System.out.println("Button SAVE");
         BuildingSerializer.Serialize(building);
     }
-
     public void Open_File_Click(ActionEvent actionEvent) {
-        /*System.out.println("Button OPEN");
-        building = BuildingSerializer.Deserialize();*/
-        Label label = new Label();
-        label.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")));
-        if(LocalDateTime.now().getSecond()%5>2) {
-            label.setStyle("-fx-background-color:#7C987C;");
-        }else {
-            label.setStyle("-fx-background-color:#984A65;");
-        }
-
-        oListLabels.add(0, label);
-        if(oListLabels.size() > 5) oListLabels.remove(oListLabels.size()-1);
+        System.out.println("Button OPEN");
+        Building b = BuildingSerializer.Deserialize();
+        if(b == null) return;
+        building = b;
+        UpdateFloorsCombo();
+        UpdateRoomsCombo();
 
     }
 
@@ -182,7 +221,7 @@ public class LabController implements Initializable {
     public void Add_Room_click(ActionEvent actionEvent) {
         Floor floor = (Floor) comboBox_floor.getValue();
         if(floor == null) return;
-        floor.addRoom(2,2,3);
+        floor.addRoom();
         UpdateRoomsCombo();
     }
 
@@ -198,7 +237,4 @@ public class LabController implements Initializable {
         UpdateFloorsCombo();
     }
 
-    public void ComboBoxFloor_changed(ActionEvent actionEvent) {
-        UpdateRoomsCombo();
-    }
 }

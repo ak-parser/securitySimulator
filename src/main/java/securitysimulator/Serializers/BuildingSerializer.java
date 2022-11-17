@@ -3,14 +3,11 @@ package securitysimulator.Serializers;
 import securitysimulator.Models.*;
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class BuildingSerializer {
-    private static String _filename = "D:\\Documents\\SER_TEST.txt";
+    private static String _filename = "building.dat";
 
     public static void SetFilename(String filename){
         BuildingSerializer._filename = filename;
@@ -20,37 +17,29 @@ public class BuildingSerializer {
             return;
         }
     }
-    public static void Serialize(Building building){
-        File file = new File(_filename);
-        Gson json = new Gson();
-        String str = json.toJson(building);
+    public static void Serialize(Building building) {
         try {
-            file.createNewFile();
-            FileWriter fileWriter = new FileWriter(file, false);
+            FileOutputStream fileOutputStream = new FileOutputStream(_filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-            fileWriter.write(str);
-
-            fileWriter.close();
-
+            objectOutputStream.writeObject(building);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
         } catch (IOException e) {
-            return;
         }
     }
 
-    public static Building Deserialize(){
-        File file = new File(_filename);
-        if(!file.exists()) return null;
-        String content;
+    public static Building Deserialize() {
         try {
-            Scanner scanner = new Scanner(file);
-            scanner.useDelimiter("\\Z");
-            content = scanner.next();
-            scanner.close();
-        } catch (Exception e){
-            return null;
+            FileInputStream fileInputStream = new FileInputStream(_filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            return (Building) objectInputStream.readObject();
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
         }
-        Gson json = new Gson();
-        Building building = json.fromJson(content, Building.class);
-        return building;
+        return null;
     }
 }
