@@ -16,7 +16,7 @@ public class UILoggerDecorator extends BaseLogger{
     private String violationMessageStyle = "-fx-text-fill:#DA4B23";
     private String reactionMessageStyle = "-fx-text-fill:#2170BF";
     private ObservableList<Label> oListLabels;
-    private int recordsCountLimit = 10;
+    private int recordsCountLimit = 12;
     public UILoggerDecorator(ObservableList<Label> observableLabelList){
         this.oListLabels = observableLabelList;
     }
@@ -47,7 +47,7 @@ public class UILoggerDecorator extends BaseLogger{
     }
 
     public void LogViolation(Floor floor, Room room, ViolationType vType, LocalDateTime date){
-        String msg = "Detected " + vType + " on " + floor + " in " + room;
+        String msg = "Виявлено " + vType + " на " + floor + " у " + room;
 
         LogToUI(msg, violationMessageStyle, date);
 

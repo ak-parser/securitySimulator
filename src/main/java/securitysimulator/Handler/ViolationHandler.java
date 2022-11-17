@@ -32,39 +32,67 @@ public class ViolationHandler {
                                 case Fire -> {
                                     ((Runnable) () -> {
                                         try {
-                                            Thread.sleep(500);
+                                            Thread.sleep(700);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Зупущено систему тушіння вогню", LocalDateTime.now());
                                         try {
-                                            Thread.sleep(500);
+                                            Thread.sleep(700);
                                         } catch (InterruptedException e) {}
-                                        logger.LogReaction(floor, room, "Викличено службу ДСНС", LocalDateTime.now());
+                                        logger.LogReaction(floor, room, "Зупущено звукову сигналізацію", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(300);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Людей сповіщено про термінову евакуацію", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(1200);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Викличено службу ДСНС (101)", LocalDateTime.now());
                                     }).run();
 
                                 }
-                                case Flood -> {
+                                case Flood, Gas -> {
+                                    ((Runnable) () -> {
+                                        try {
+                                            Thread.sleep(800);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Викличено службу ДСНС (101)", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(200);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Людей сповіщено про евакуацію", LocalDateTime.now());
+                                    }).run();
+                                }
+                                case  Invasion -> {
                                     ((Runnable) () -> {
                                         try {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
-                                        logger.LogReaction(floor, room, "Зупущено систему тушіння вогню", LocalDateTime.now());
+                                        logger.LogReaction(floor, room, "Викличено поліцію (102)", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(600);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
+                                    }).run();
+                                }
+                                case Movement -> {
+                                    ((Runnable) () -> {
                                         try {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
-                                        logger.LogReaction(floor, room, "Викличено службу ДСНС", LocalDateTime.now());
+                                        logger.LogReaction(floor, room, "Очікування вводу паролю безпеки", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(2000);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Пароль не було введено!", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(800);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Викличено поліцію (102)", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
                                     }).run();
-                                }
-                                case Gas -> {
-
-                                }
-                                case  Invasion -> {
-
-                                }
-                                case Movement -> {
-
-                                }
-                                default -> {
-
                                 }
                             }
                         }

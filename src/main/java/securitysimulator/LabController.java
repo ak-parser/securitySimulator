@@ -41,6 +41,9 @@ public class LabController implements Initializable {
     @FXML private Button button_start_handler;
     @FXML private Button button_stop_handler;
 
+    @FXML private Label label_floors_count;
+    @FXML private Label label_rooms_count;
+
     private ILogger logger;
     private ObservableList<Label> oListLabels;
 
@@ -83,17 +86,18 @@ public class LabController implements Initializable {
             labels.add(new Label("Датчики води"));
             labels.add(new Label("Датчики газу"));
             labels.add(new Label("Датчики руху"));
+            labels.add(new Label("Датчики проникнення"));
 
             list_datchyky.setItems(FXCollections.observableArrayList(
                     labels
             ));
         }
 
-
         UpdateRoomsCombo();
+        UpdateFloorsCountLabel();
+        UpdateRoomsCountLabel();
 
         createHandlerThread();
-
 
     }
 
@@ -121,9 +125,17 @@ public class LabController implements Initializable {
         violationHandlerThread = null;
     }
 
+    private void UpdateFloorsCountLabel(){
+        label_floors_count.setText("Поверхи " + building.getFloorsList().size());
+    }
+    private void UpdateRoomsCountLabel(){
+        Floor floor = (Floor) comboBox_floor.getValue();
+        if(floor == null) return;
+        label_rooms_count.setText("Кімнати " + floor.getRoomList().size());
+    }
+
     private void UpdateFloorsCombo(){
         comboBox_floor.setItems(FXCollections.observableArrayList(building.getFloorsList()));
-        //comboBox_floor.setValue(building.getFloorsList().get(0));
     }
 
     private void UpdateRoomsCombo(){
@@ -158,6 +170,7 @@ public class LabController implements Initializable {
     }
 
     public void ComboBoxFloor_changed(ActionEvent actionEvent) {
+        UpdateRoomsCountLabel();
         UpdateRoomsCombo();
     }
     public void ComboBoxRoom_changed(ActionEvent actionEvent) {
@@ -216,6 +229,8 @@ public class LabController implements Initializable {
         Floor floor = (Floor) comboBox_floor.getValue();
         if(floor == null) return;
         floor.removeRoom();
+        UpdateRoomsCombo();
+        UpdateRoomsCountLabel();
     }
 
     public void Add_Room_click(ActionEvent actionEvent) {
@@ -223,18 +238,21 @@ public class LabController implements Initializable {
         if(floor == null) return;
         floor.addRoom();
         UpdateRoomsCombo();
+        UpdateRoomsCountLabel();
     }
 
     public void Remove_Floor_click(ActionEvent actionEvent) {
-        Floor floor = (Floor) comboBox_floor.getValue();
-        if(floor == null) return;
-        floor.removeRoom();
+        building.removeFloor();
+        UpdateFloorsCombo();
         UpdateRoomsCombo();
+        UpdateFloorsCountLabel();
     }
 
     public void Add_Floor_btn_click(ActionEvent actionEvent) {
         building.addFloor();
         UpdateFloorsCombo();
+        UpdateRoomsCombo();
+        UpdateFloorsCountLabel();
     }
 
 }

@@ -11,8 +11,8 @@
     </padding>
     <Pane prefHeight="498.0" prefWidth="939.0" style="-fx-background-color: #dce4f2;">
         <children>
-            <ComboBox id="comboBox_floor" fx:id="comboBox_floor" layoutX="18.0" layoutY="16.0" onAction="#ComboBoxFloor_changed" prefHeight="35.0" prefWidth="159.0" />
-            <ComboBox id="comboBox_room" fx:id="comboBox_room" layoutX="242.0" layoutY="16.0" onAction="#ComboBoxRoom_changed" prefHeight="35.0" prefWidth="159.0" />
+            <ComboBox id="comboBox_floor" fx:id="comboBox_floor" layoutX="18.0" layoutY="40.0" onAction="#ComboBoxFloor_changed" prefHeight="35.0" prefWidth="159.0" />
+            <ComboBox id="comboBox_room" fx:id="comboBox_room" layoutX="240.0" layoutY="40.0" onAction="#ComboBoxRoom_changed" prefHeight="35.0" prefWidth="159.0" />
             <Label layoutX="14.0" layoutY="87.0" text="Властивості">
                 <font>
                     <Font name="Georgia" size="18.0" />
@@ -79,6 +79,8 @@
          <Button fx:id="button_open" layoutX="302.0" layoutY="445.0" mnemonicParsing="false" onAction="#Open_File_Click" prefHeight="25.0" prefWidth="128.0" text="Відкрити файл" />
          <Button fx:id="button_save" layoutX="302.0" layoutY="411.0" mnemonicParsing="false" onAction="#Save_button_click" prefHeight="25.0" prefWidth="128.0" text="Зберегти до файлу" />
          <ListView fx:id="list_log" layoutX="517.0" layoutY="51.0" prefHeight="424.0" prefWidth="360.0" />
+         <Label fx:id="label_floors_count" layoutX="19.0" layoutY="6.0" prefHeight="25.0" prefWidth="92.0" text="Поверхи " />
+         <Label fx:id="label_rooms_count" layoutX="240.0" layoutY="13.0" text="Кімнати " />
         </children>
     </Pane>
 </VBox>
