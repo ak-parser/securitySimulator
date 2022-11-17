@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class LabController implements Initializable {
     @FXML
     private ComboBox comboBox_violationType;
     @FXML

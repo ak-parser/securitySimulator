@@ -1,4 +1,6 @@
-package securitysimulator.Models;
+package securitysimulator.Generators;
+
+import securitysimulator.Models.ViolationType;
 
 import java.util.Random;
 
