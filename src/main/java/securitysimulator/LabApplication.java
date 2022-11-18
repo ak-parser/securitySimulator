@@ -28,7 +28,4 @@ public class LabApplication extends Application {
         launch();
     }
 
-    /*public void stop(){
-        System.out.println("Stop");
-    }*/
 }

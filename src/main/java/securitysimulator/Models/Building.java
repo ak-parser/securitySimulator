@@ -9,9 +9,6 @@ import java.util.Random;
 public class Building implements Serializable {
     private final List<Floor> floorsList;
 
-//    public Building(){
-//        floorsList = Collections.synchronizedList(new ArrayList<>());
-//    }
     public Building(){
         floorsList = new ArrayList<>();
         floorsList.add(new Floor("Поверх 1"));

@@ -41,7 +41,7 @@ public class ViolationHandler {
     }
 
     public void handle(Room currentRoom, ObservableList<Label> oListLabelsDatchiky) {
-        //System.out.println("Handling..");
+        System.out.println("Handling..");
         for (Floor floor : building.getFloorsList()) {
             for (Room room : floor.getRoomList()) {
                 synchronized (room) {

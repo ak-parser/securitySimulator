@@ -44,29 +44,10 @@ public class ViolationGeneratorThread implements Runnable {
                 }
             }
             try {
-                Thread.sleep(30);
+                Thread.sleep(40);
             } catch (InterruptedException e) {
 
             }
-            /*
-            Random randomizer = new Random();
-            if(randomizer.nextInt(5) == 1){
-                try {
-                    Thread.sleep(randomizer.nextInt(10) * 1000);
-                } catch (InterruptedException e) {
-
-                }
-            }
-            ViolationType violationType = RandomViolationGenerator.GenerateViolation();
-            System.out.println("Generating " + violationType);
-            try {
-                Room room = building.getRandomFloor().getRandomRoom();
-                synchronized (room){
-                    room.addViolation(violationType);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }*/
         }
     }
 
