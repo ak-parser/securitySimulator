@@ -1,6 +1,5 @@
 package securitysimulator;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import securitysimulator.Logger.FileLoggerDecorator;
 import securitysimulator.Logger.ILogger;
-import securitysimulator.Logger.TestLogger;
 import securitysimulator.Logger.UILoggerDecorator;
 import securitysimulator.Models.*;
 import securitysimulator.Serializers.BuildingSerializer;
@@ -17,10 +15,7 @@ import securitysimulator.Thread.ViolationGeneratorThread;
 import securitysimulator.Thread.ViolationHandlerThread;
 
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class LabController implements Initializable {
@@ -45,15 +40,16 @@ public class LabController implements Initializable {
     @FXML private Label label_rooms_count;
 
     private ILogger logger;
-    private ObservableList<Label> oListLabels;
+    private ObservableList<Label> oListLabelsLog;
+    private ObservableList<Label> oListLabelsDatchyky;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        oListLabels = FXCollections.observableArrayList(new ArrayList<Label>());
+        oListLabelsLog = FXCollections.observableArrayList(new ArrayList<Label>());
         logger = new FileLoggerDecorator("log.txt");
-        logger = new UILoggerDecorator(logger, oListLabels);
-        list_log.setItems(oListLabels);
+        logger = new UILoggerDecorator(logger, oListLabelsLog);
+        list_log.setItems(oListLabelsLog);
 
         button_stop_generator.setVisible(false);
         button_start_handler.setVisible(false);
@@ -88,9 +84,9 @@ public class LabController implements Initializable {
             labels.add(new Label("Датчики руху"));
             labels.add(new Label("Датчики проникнення"));
 
-            list_datchyky.setItems(FXCollections.observableArrayList(
-                    labels
-            ));
+            oListLabelsDatchyky = FXCollections.observableArrayList(labels);
+
+            list_datchyky.setItems(oListLabelsDatchyky);
         }
 
         UpdateRoomsCombo();
@@ -105,7 +101,7 @@ public class LabController implements Initializable {
     private static ViolationHandlerThread violationHandlerThread;
     private Building building = new Building();
     public void createHandlerThread() {
-        violationHandlerThread = new ViolationHandlerThread(building, logger);
+        violationHandlerThread = new ViolationHandlerThread(building, logger, oListLabelsDatchyky);
         violationHandlerThread.start();
     }
 
@@ -147,8 +143,12 @@ public class LabController implements Initializable {
     }
 
     public void UpdateSpinboxes(){
+        ResetDatchykyLabelsStyle();
         Room room = (Room)comboBox_room.getValue();
         if(room == null) return;
+
+        ViolationHandlerThread.SetRoom(room);
+
         if(spinner_area1.getValueFactory() == null) return;
         if(spinner_area2.getValueFactory() == null) return;
         if(spinner_doors.getValueFactory() == null) return;
@@ -160,6 +160,13 @@ public class LabController implements Initializable {
         spinner_windows.getValueFactory().setValue(Integer.valueOf(room.getWindows()));
     }
 
+    public void ResetDatchykyLabelsStyle(){
+        for(Label l : oListLabelsDatchyky){
+            synchronized (l){
+                l.setStyle("");
+            }
+        }
+    }
     public void Set_Room_button_Click(ActionEvent actionEvent){
         Room room = (Room)comboBox_room.getValue();
         if(room == null) return;
@@ -227,7 +234,7 @@ public class LabController implements Initializable {
     }
 
     public void Clear_log_click(ActionEvent actionEvent) {
-        oListLabels.clear();
+        oListLabelsLog.clear();
     }
     public void Remove_Room_click(ActionEvent actionEvent) {
         Floor floor = (Floor) comboBox_floor.getValue();

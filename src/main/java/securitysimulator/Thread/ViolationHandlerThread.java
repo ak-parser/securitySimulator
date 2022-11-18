@@ -1,20 +1,35 @@
 package securitysimulator.Thread;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import securitysimulator.Handler.ViolationHandler;
 import securitysimulator.Logger.FileLoggerDecorator;
 import securitysimulator.Logger.ILogger;
 import securitysimulator.Logger.UILoggerDecorator;
 import securitysimulator.Models.Building;
+import securitysimulator.Models.Room;
 
 public class ViolationHandlerThread implements Runnable {
     private final Thread thread;
     ViolationHandler violationHandler;
     private boolean exit = false;
+    private ObservableList<Label> oListLabelsDatchiky;
 
-    public ViolationHandlerThread(Building building, ILogger logger) {
+    private static Room currentRoom;
+
+    public ViolationHandlerThread(Building building, ILogger logger, ObservableList<Label> oListLabelsDatch) {
+        currentRoom = building.getFloor(0).getRoom(0);
+        oListLabelsDatchiky = oListLabelsDatch;
         violationHandler = new ViolationHandler(building, logger);
         thread = new Thread(this);
         System.out.println("New thread: " + thread);
+    }
+
+    public static void SetRoom(Room room){
+        if(currentRoom == null) return;
+        synchronized (currentRoom){
+            currentRoom = room;
+        }
     }
 
     public void start() {
@@ -28,7 +43,7 @@ public class ViolationHandlerThread implements Runnable {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
-            violationHandler.handle();
+            violationHandler.handle(currentRoom, oListLabelsDatchiky);
         }
     }
     public void kill() {

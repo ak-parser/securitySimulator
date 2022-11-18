@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8a65deb-39b1-4488-a3ae-e6a0dca0ae1d" name="Changes" comment="Add threads &amp; handler">
+    <list default="true" id="f8a65deb-39b1-4488-a3ae-e6a0dca0ae1d" name="Changes" comment="1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Handler/ViolationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Handler/ViolationHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/LabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/LabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/securitysimulator/Thread/ViolationHandlerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/securitysimulator/Thread/ViolationHandlerThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +82,14 @@
       <option name="presentableId" value="Default" />
       <updated>1668668004757</updated>
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1668725283205</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668725283205</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -91,5 +102,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>

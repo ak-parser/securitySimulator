@@ -1,5 +1,8 @@
 package securitysimulator.Handler;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import securitysimulator.Logger.ILogger;
 import securitysimulator.Models.Building;
 import securitysimulator.Models.Floor;
@@ -18,12 +21,32 @@ public class ViolationHandler {
         this.logger = logger;
     }
 
-    public void handle() {
+    private void SetLabelStyling(Label label){
+        Platform.runLater(()->{
+            synchronized (label) {
+                label.setStyle("-fx-text-fill:red;");
+            }
+        });
+
+    }
+    private void ResetLabelStyling(Label label){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {}
+        Platform.runLater(()->{
+            synchronized (label) {
+                label.setStyle("");
+            }
+        });
+    }
+
+    public void handle(Room currentRoom, ObservableList<Label> oListLabelsDatchiky) {
         System.out.println("Handling..");
         for (Floor floor : building.getFloorsList()) {
             for (Room room : floor.getRoomList()) {
                 synchronized (room) {
                     boolean violationHandled = false;
+                    boolean isThisRoom = currentRoom == room;
                     for (ViolationType violationType : room.getViolationsList()) {
                         violationHandled = true;
                         synchronized (logger) {
@@ -31,6 +54,8 @@ public class ViolationHandler {
                             switch (violationType){
                                 case Fire -> {
                                     new Thread(() -> {
+                                        if(isThisRoom)
+                                            SetLabelStyling(oListLabelsDatchiky.get(0));
                                         try {
                                             Thread.sleep(700);
                                         } catch (InterruptedException e) {}
@@ -47,11 +72,15 @@ public class ViolationHandler {
                                             Thread.sleep(1200);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Викличено службу ДСНС (101)", LocalDateTime.now());
+                                        if(isThisRoom)
+                                            ResetLabelStyling(oListLabelsDatchiky.get(0));
                                     }).start();
 
                                 }
-                                case Flood, Gas -> {
+                                case Flood ->{
                                     new Thread(() -> {
+                                        if(isThisRoom)
+                                            SetLabelStyling(oListLabelsDatchiky.get(1));
                                         try {
                                             Thread.sleep(800);
                                         } catch (InterruptedException e) {}
@@ -60,22 +89,30 @@ public class ViolationHandler {
                                             Thread.sleep(200);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Людей сповіщено про евакуацію", LocalDateTime.now());
+                                        if(isThisRoom)
+                                            ResetLabelStyling(oListLabelsDatchiky.get(1));
                                     }).start();
                                 }
-                                case  Invasion -> {
+                                case Gas -> {
                                     new Thread(() -> {
+                                        if(isThisRoom)
+                                            SetLabelStyling(oListLabelsDatchiky.get(2));
                                         try {
-                                            Thread.sleep(500);
+                                            Thread.sleep(800);
                                         } catch (InterruptedException e) {}
-                                        logger.LogReaction(floor, room, "Викличено поліцію (102)", LocalDateTime.now());
+                                        logger.LogReaction(floor, room, "Викличено службу ДСНС (101)", LocalDateTime.now());
                                         try {
-                                            Thread.sleep(600);
+                                            Thread.sleep(200);
                                         } catch (InterruptedException e) {}
-                                        logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
+                                        logger.LogReaction(floor, room, "Людей сповіщено про евакуацію", LocalDateTime.now());
+                                        if(isThisRoom)
+                                            ResetLabelStyling(oListLabelsDatchiky.get(2));
                                     }).start();
                                 }
                                 case Movement -> {
                                     new Thread(() -> {
+                                        if(isThisRoom)
+                                            SetLabelStyling(oListLabelsDatchiky.get(3));
                                         try {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
@@ -92,8 +129,27 @@ public class ViolationHandler {
                                             Thread.sleep(500);
                                         } catch (InterruptedException e) {}
                                         logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
+                                        if(isThisRoom)
+                                            ResetLabelStyling(oListLabelsDatchiky.get(3));
                                     }).start();
                                 }
+                                case  Invasion -> {
+                                    new Thread(() -> {
+                                        if(isThisRoom)
+                                            SetLabelStyling(oListLabelsDatchiky.get(4));
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Викличено поліцію (102)", LocalDateTime.now());
+                                        try {
+                                            Thread.sleep(600);
+                                        } catch (InterruptedException e) {}
+                                        logger.LogReaction(floor, room, "Включено звукову сигналізацію", LocalDateTime.now());
+                                        if(isThisRoom)
+                                            ResetLabelStyling(oListLabelsDatchiky.get(4));
+                                    }).start();
+                                }
+
                             }
                         }
                     }
